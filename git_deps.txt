@@ -1,0 +1,9 @@
+src/third_party/android_protobuf/src|https://android.googlesource.com/platform/external/protobuf.git|7fca48d8ce97f7ba3ab8eea5c472f1ad3711762f
+src/third_party/android_sdk/androidx_browser/src|https://chromium.googlesource.com/external/gob/android/platform/frameworks/support/browser.git|65086eb5e52c16778fa7b4f157156d17b176fcb3
+src/third_party/apache-portable-runtime/src|https://chromium.googlesource.com/external/apache-portable-runtime.git|c3f11fcd86b42922834cae91103cf068246c6bb6
+src/third_party/hunspell_dictionaries|https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries.git|41cdffd71c9948f63c7ad36e1fb0ff519aa7a37e
+src/third_party/junit/src|https://chromium.googlesource.com/external/junit.git|64155f8a9babcfcf4263cf4d08253a1556e75481
+src/third_party/libunwindstack|https://chromium.googlesource.com/chromium/src/third_party/libunwindstack.git|3c86843ae0f8d560ae0d15b92e34ce88cf83057a
+src/third_party/mockito/src|https://chromium.googlesource.com/external/mockito/mockito.git|04a2a289a4222f80ad20717c25144981210d2eac
+src/third_party/netty-tcnative/src|https://chromium.googlesource.com/external/netty-tcnative.git|7eeb50be90c9ba0f6afa3375132df63942a0f32d
+src/third_party/netty4/src|https://chromium.googlesource.com/external/netty4.git|cc4420b13bb4eeea5b1cf4f93b2755644cd3b120

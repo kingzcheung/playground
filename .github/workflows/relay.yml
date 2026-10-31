@@ -1,0 +1,42 @@
+name: Relay chromium deps (CIPD + googlesource git)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chromium-relay
+
+permissions:
+  contents: write
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout relay scripts
+        uses: actions/checkout@v4
+
+      - name: Install depot_tools (provides cipd)
+        run: |
+          git clone --depth=1 https://chromium.googlesource.com/chromium/tools/depot_tools.git "$HOME/depot_tools"
+          echo "$HOME/depot_tools" >> "$GITHUB_PATH"
+
+      - name: Fetch git deps + CIPD packages
+        run: python3 relay.py --out "$PWD/out"
+
+      - name: Package (zstd + split <2GB)
+        run: |
+          cd out/root
+          tar -I 'zstd -T0 -3' -cf ../relay.tar.zst .
+          cd ..
+          split -b 1800m relay.tar.zst relay.tar.zst.part-
+          ls -lh relay.tar.zst.part-*
+
+      - name: Create draft release and upload parts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "relay-${{ github.run_id }}" \
+            --prerelease --title "chromium deps relay ${{ github.run_id }}" \
+            --notes "CIPD packages + googlesource git deps for chromium 105.0.5195.24 android build. 下载全部 part 后: cat relay.tar.zst.part-* > relay.tar.zst && tar --zstd -xf relay.tar.zst -C <构建树根目录>" \
+            out/relay.tar.zst.part-*
